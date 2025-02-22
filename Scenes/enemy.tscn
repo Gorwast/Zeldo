@@ -5,8 +5,6 @@
 [ext_resource type="Script" path="res://Scripts/hitbox_component.gd" id="3_unfxo"]
 [ext_resource type="Script" path="res://Scripts/health_component.gd" id="4_4x4af"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1fp8"]
-
 [sub_resource type="Animation" id="Animation_rhnnt"]
 resource_name = "attack"
 tracks/0/type = "method"
@@ -47,12 +45,19 @@ _data = {
 "idle": SubResource("Animation_8hnpq")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1fp8"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_oktbg"]
-radius = 122.066
+radius = 88.0057
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_luq0e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r67nr")
+}
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_ia10f")
@@ -70,11 +75,6 @@ shape = SubResource("CapsuleShape2D_f1fp8")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("4_4x4af")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_r67nr")
-}
 
 [node name="SearchRadius" type="Area2D" parent="."]
 

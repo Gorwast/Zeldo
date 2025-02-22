@@ -1,6 +1,97 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkvgpkp6aorpn"]
+[gd_scene load_steps=8 format=3 uid="uid://bkvgpkp6aorpn"]
 
+[ext_resource type="Theme" uid="uid://qy4oy4qlstxa" path="res://Assets/ui.tres" id="1_2xgyr"]
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_6pcbf"]
 [ext_resource type="Texture2D" uid="uid://b6mul3po1dig" path="res://Assets/title_screen.png" id="1_s7qx1"]
+[ext_resource type="AudioStream" uid="uid://d2uv1tb666f2m" path="res://Assets/Retro8.mp3" id="4_4nxcr"]
+
+[sub_resource type="Animation" id="Animation_ijvtq"]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_game"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlaySound")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_sfopr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_laf0u"]
+_data = {
+"RESET": SubResource("Animation_sfopr"),
+"fade": SubResource("Animation_ijvtq")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -9,6 +100,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_2xgyr")
+script = ExtResource("1_6pcbf")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -23,9 +116,39 @@ layout_mode = 0
 offset_top = 359.0
 offset_right = 1152.0
 offset_bottom = 545.0
+alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
 layout_mode = 2
 
+[node name="PlayButton" type="Button" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Jugar"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="BoxContainer"]
 layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="BoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Salir"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+offset_left = -14.0
+offset_top = -10.0
+offset_right = 94.0
+offset_bottom = 110.0
+scale = Vector2(10.8762, 5.59521)
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_laf0u")
+}
+
+[node name="PlaySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4nxcr")
+
+[connection signal="pressed" from="BoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="BoxContainer/VBoxContainer2/ExitButton" to="." method="_on_exit_button_pressed"]
