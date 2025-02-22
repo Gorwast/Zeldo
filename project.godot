@@ -17,8 +17,11 @@ config/icon="res://icon.svg"
 
 [layer_names]
 
+2d_physics/layer_1="player"
 2d_navigation/layer_1="jugador"
+2d_physics/layer_2="enemy"
 2d_navigation/layer_2="enemigos"
+2d_physics/layer_3="object"
 2d_navigation/layer_3="objetos"
 
 [rendering]

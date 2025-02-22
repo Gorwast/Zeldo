@@ -8,7 +8,7 @@
 [node name="Enemy" parent="." instance=ExtResource("1_0258r")]
 collision_layer = 2
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_g1qhx")]
+[node name="Player" parent="." instance=ExtResource("2_g1qhx")]
 position = Vector2(-35, -3)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
