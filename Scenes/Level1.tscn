@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7wlgl4ogc5dv"]
+[gd_scene load_steps=7 format=3 uid="uid://cx6r7r1uxkd7d"]
 
-[ext_resource type="PackedScene" uid="uid://bg4vl105gefml" path="res://Assets/mapamundi.tscn" id="1_0fv5x"]
-[ext_resource type="PackedScene" path="res://Scenes/player.tscn" id="2_wssov"]
-[ext_resource type="PackedScene" path="res://Scenes/enemy.tscn" id="3_rf87k"]
+[ext_resource type="PackedScene" uid="uid://du0614uy4fm4t" path="res://Assets/mapamundi.tscn" id="1_0fv5x"]
+[ext_resource type="PackedScene" uid="uid://df7jsca8v3k71" path="res://Scenes/player.tscn" id="2_wssov"]
+[ext_resource type="PackedScene" uid="uid://dw8vqv1c6smfv" path="res://Scenes/ui.tscn" id="3_7klpy"]
+[ext_resource type="PackedScene" uid="uid://f3nx1us1at4a" path="res://Scenes/enemy.tscn" id="3_rf87k"]
 [ext_resource type="AudioStream" uid="uid://ch17vgvh7d3ic" path="res://Assets/2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3" id="4_4yhcn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_13pc7"]
@@ -17,6 +18,13 @@ collision_mask = 7
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2.5, 2.5)
+
+[node name="Ui" parent="Player/Camera2D" instance=ExtResource("3_7klpy")]
+offset_left = -170.0
+offset_top = -208.0
+offset_right = -170.0
+offset_bottom = -208.0
+scale = Vector2(1e-05, 1e-05)
 
 [node name="Enemy" parent="." instance=ExtResource("3_rf87k")]
 position = Vector2(252, 294)

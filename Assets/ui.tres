@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://qy4oy4qlstxa"]
+
+[ext_resource type="FontFile" uid="uid://c78xd2vq676ld" path="res://Assets/Jersey15-Regular.ttf" id="1_ytla1"]
+
+[resource]
+Button/font_sizes/font_size = 60
+Button/fonts/font = ExtResource("1_ytla1")
+Label/font_sizes/font_size = 40
+Label/fonts/font = ExtResource("1_ytla1")

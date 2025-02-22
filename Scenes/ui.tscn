@@ -1,10 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw8vqv1c6smfv"]
+[gd_scene load_steps=2 format=3 uid="uid://dw8vqv1c6smfv"]
 
-[ext_resource type="FontFile" uid="uid://c78xd2vq676ld" path="res://Assets/Jersey15-Regular.ttf" id="1_503mq"]
-
-[sub_resource type="Theme" id="Theme_wupe4"]
-Label/font_sizes/font_size = 40
-Label/fonts/font = ExtResource("1_503mq")
+[ext_resource type="Theme" uid="uid://qy4oy4qlstxa" path="res://Assets/ui.tres" id="1_km5x3"]
 
 [node name="Ui" type="Control"]
 layout_mode = 3
@@ -13,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_wupe4")
+theme = ExtResource("1_km5x3")
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
 layout_mode = 2

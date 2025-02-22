@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=51 format=3 uid="uid://ukg4vm4lnm60"]
+[gd_resource type="SpriteFrames" load_steps=51 format=3 uid="uid://bqrmwtdaiigiu"]
 
 [ext_resource type="Texture2D" uid="uid://bbg10vx3krj1c" path="res://Assets/enemy_goblin/D_Attack.png" id="1_hgr3q"]
 [ext_resource type="Texture2D" uid="uid://c2w6grijmtpw6" path="res://Assets/enemy_goblin/S_Attack.png" id="2_jkpox"]
