@@ -14,12 +14,16 @@ func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 
 func _physics_process(delta):
+	
 	if followPlayer:
 		move_towards_player()
+
+func move_towards_player():
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		var distance = global_position.distance_to(player.global_position)
-
+		velocity = direction * speed
+		
 		if distance > attack_range:
 			velocity = direction * speed
 			move_and_slide()
@@ -28,12 +32,6 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 			if can_attack:
 				attack()
-
-func move_towards_player():
-	if player:
-		var direction = (player.global_position - global_position).normalized()
-		velocity = direction * speed
-		move_and_slide()
 
 func attack():
 	can_attack = false
@@ -52,3 +50,4 @@ func _on_search_radius_body_entered(body: Node2D) -> void:
 func _on_search_radius_body_exited(body: Node2D) -> void:
 	if player:
 		followPlayer = false
+	animation_player.play("idle")

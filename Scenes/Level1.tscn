@@ -26,3 +26,4 @@ shape = SubResource("CapsuleShape2D_13pc7")
 
 [node name="2021-08-17-8BitNostalgia-Www_fesliyanStudios_com" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_4yhcn")
+autoplay = true

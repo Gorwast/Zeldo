@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://f3nx1us1at4a"]
+[gd_scene load_steps=10 format=3 uid="uid://f3nx1us1at4a"]
 
 [ext_resource type="SpriteFrames" uid="uid://bqrmwtdaiigiu" path="res://Assets/enemy_animation.tres" id="1_ia10f"]
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_luq0e"]
@@ -19,14 +19,32 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [&"attack", 1.0, false],
+"args": [&"attack_side", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8hnpq"]
+resource_name = "idle"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"idle", 1.0, false],
 "method": &"play"
 }]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r67nr"]
 _data = {
-"attack": SubResource("Animation_rhnnt")
+"attack": SubResource("Animation_rhnnt"),
+"idle": SubResource("Animation_8hnpq")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oktbg"]
@@ -38,7 +56,7 @@ script = ExtResource("1_luq0e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_ia10f")
-animation = &"idle"
+animation = &"attack_side"
 autoplay = "idle"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
