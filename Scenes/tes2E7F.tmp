@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccaa1x1vty77"]
+
+[ext_resource type="PackedScene" uid="uid://f3nx1us1at4a" path="res://Scenes/enemy.tscn" id="1_0258r"]
+[ext_resource type="PackedScene" uid="uid://df7jsca8v3k71" path="res://Scenes/player.tscn" id="2_g1qhx"]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="Enemy" parent="." instance=ExtResource("1_0258r")]
+speed = 100.0
+attack_range = 40.0
+damage = 10
+attack_cooldown = 1.5
+
+[node name="Player" parent="." instance=ExtResource("2_g1qhx")]
+position = Vector2(-35, -3)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(35, 3)
+zoom = Vector2(2, 2)

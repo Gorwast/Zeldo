@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmcd7ckgnklu8"
-path="res://.godot/imported/S_Walk.png-c43a9c1eedc7e983e7564e7f974a9648.ctex"
+uid="uid://bvp1sldm7rlao"
+path="res://.godot/imported/Unarmed_Hurt_full.png-254c836cae38084758a1c4996d4bb6cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/S_Walk.png"
-dest_files=["res://.godot/imported/S_Walk.png-c43a9c1eedc7e983e7564e7f974a9648.ctex"]
+source_file="res://Assets/player/Unarmed_Hurt_full.png"
+dest_files=["res://.godot/imported/Unarmed_Hurt_full.png-254c836cae38084758a1c4996d4bb6cd.ctex"]
 
 [params]
 
