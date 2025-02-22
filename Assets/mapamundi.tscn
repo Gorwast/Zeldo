@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://bg4vl105gefml"]
+[gd_scene load_steps=10 format=4 uid="uid://bg4vl105gefml"]
 
 [ext_resource type="Texture2D" uid="uid://1lg8gc8j1u4i" path="res://Assets/roguelikeSheet_transparent.png" id="1_m04ww"]
 [ext_resource type="Texture2D" uid="uid://c6xguocrd7og8" path="res://Assets/pixil-frame-0.png" id="2_234l8"]
+[ext_resource type="Texture2D" uid="uid://sj4vopviy6w2" path="res://Assets/4014627.webp" id="3_8cey2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ix7nj"]
 texture = ExtResource("1_m04ww")
@@ -5926,3 +5927,8 @@ tile_set = SubResource("TileSet_6mauy")
 position = Vector2(72, 1555)
 scale = Vector2(0.455263, 0.408335)
 texture = ExtResource("2_234l8")
+
+[node name="4014627" type="Sprite2D" parent="."]
+position = Vector2(126, 1585)
+scale = Vector2(0.118889, 0.113889)
+texture = ExtResource("3_8cey2")
