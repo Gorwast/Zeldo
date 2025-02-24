@@ -1,33 +1,76 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx6r7r1uxkd7d"]
+[gd_scene load_steps=11 format=3 uid="uid://cx6r7r1uxkd7d"]
 
 [ext_resource type="PackedScene" uid="uid://bg4vl105gefml" path="res://Assets/mapamundi.tscn" id="1_0fv5x"]
 [ext_resource type="PackedScene" uid="uid://df7jsca8v3k71" path="res://Scenes/player.tscn" id="2_wssov"]
 [ext_resource type="PackedScene" uid="uid://dw8vqv1c6smfv" path="res://Scenes/ui.tscn" id="3_7klpy"]
 [ext_resource type="PackedScene" uid="uid://f3nx1us1at4a" path="res://Scenes/enemy.tscn" id="3_rf87k"]
 [ext_resource type="AudioStream" uid="uid://ch17vgvh7d3ic" path="res://Assets/2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3" id="4_4yhcn"]
+[ext_resource type="Shader" path="res://Assets/new_shader.gdshader" id="4_ks8nf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1av5l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glqno"]
+shader = ExtResource("4_ks8nf")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 0.506
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_13pc7"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ji4pd"]
+radius = 85.0
+
 [node name="Level1" type="Node2D"]
 
-[node name="Node2D" parent="." instance=ExtResource("1_0fv5x")]
+[node name="Map" parent="." instance=ExtResource("1_0fv5x")]
 
 [node name="Player" parent="." instance=ExtResource("2_wssov")]
-position = Vector2(170, 208)
+position = Vector2(62, 51)
 collision_mask = 7
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+material = SubResource("ShaderMaterial_1av5l")
 zoom = Vector2(2.5, 2.5)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Player/Camera2D/CanvasLayer"]
+z_index = 20
+material = SubResource("ShaderMaterial_glqno")
+offset_right = -582.128
+offset_bottom = -314.0
+scale = Vector2(16.32, 18.28)
+color = Color(0.812898, 0.316765, 0.452122, 1)
+
 [node name="Ui" parent="Player/Camera2D" instance=ExtResource("3_7klpy")]
-offset_left = -191.0
-offset_top = -125.0
-offset_right = -191.0
-offset_bottom = -125.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -119.0
+offset_right = -187.0
+offset_bottom = -119.0
 scale = Vector2(0.33, 0.33)
 
 [node name="Enemy" parent="." instance=ExtResource("3_rf87k")]
-position = Vector2(252, 294)
+position = Vector2(540, 407)
+collision_layer = 4
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 shape = SubResource("CapsuleShape2D_13pc7")
@@ -35,3 +78,9 @@ shape = SubResource("CapsuleShape2D_13pc7")
 [node name="2021-08-17-8BitNostalgia-Www_fesliyanStudios_com" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_4yhcn")
 autoplay = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(937, 1153)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ji4pd")

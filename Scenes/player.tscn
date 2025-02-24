@@ -14,11 +14,13 @@ func _physics_process(delta: float) -> void:
 	var directionTop := Input.get_axis(\"ui_up\", \"ui_down\")
 	if Input.is_action_pressed(\"ui_accept\"):
 		$AnimationPlayer.play(\"attack\")
+		
 	if direction or directionTop:
 		if direction < 0:
-			$AnimatedSprite2D.flip_h = false
-		else: 
-			$AnimatedSprite2D.flip_h = true
+			
+			$AnimatedSprite2D.scale.x = 1
+		else:
+			$AnimatedSprite2D.scale.x = -1
 		velocity.x = direction * SPEED * delta
 		velocity.y = directionTop * SPEED * delta
 	else:
@@ -30,10 +32,12 @@ func _physics_process(delta: float) -> void:
 
 func _on_sword_area_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent:
-		print(\"hola mundo\")
+		print(\"Attack Hitbox\")
 		if area.has_method(\"damage\"):
 			area.damage(1)
 "
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ikcpc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4rg2a"]
 
@@ -41,41 +45,12 @@ func _on_sword_area_area_entered(area: Area2D) -> void:
 radius = 5.0
 height = 10.0
 
-[sub_resource type="Animation" id="Animation_tp2cp"]
-resource_name = "attack"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"attack", 1.0, false],
-"method": &"play"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SwordArea:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_sdfsy"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SwordArea:visible")
+tracks/0/path = NodePath("AnimatedSprite2D/SwordArea:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -84,14 +59,69 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/SwordArea:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tp2cp"]
+resource_name = "attack"
+length = 0.15
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"attack", 1.0, false],
+"method": &"play"
+}, {
+"args": [&"idle", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/SwordArea:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/SwordArea:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lxpe7"]
 _data = {
 "RESET": SubResource("Animation_sdfsy"),
 "attack": SubResource("Animation_tp2cp")
 }
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ikcpc"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = SubResource("GDScript_pf5ec")
@@ -101,6 +131,16 @@ sprite_frames = ExtResource("1_qs01p")
 animation = &"attack"
 autoplay = "idle"
 frame_progress = 0.486443
+
+[node name="SwordArea" type="Area2D" parent="AnimatedSprite2D"]
+visible = false
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/SwordArea"]
+position = Vector2(-19, 1)
+scale = Vector2(0.859153, -1.34651)
+shape = SubResource("CircleShape2D_ikcpc")
 
 [node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
 visible = false
@@ -122,13 +162,4 @@ libraries = {
 "": SubResource("AnimationLibrary_lxpe7")
 }
 
-[node name="SwordArea" type="Area2D" parent="."]
-visible = false
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordArea"]
-position = Vector2(-19, 1)
-scale = Vector2(0.859153, -1.34651)
-shape = SubResource("CircleShape2D_ikcpc")
-
-[connection signal="area_entered" from="SwordArea" to="." method="_on_sword_area_area_entered"]
+[connection signal="area_entered" from="AnimatedSprite2D/SwordArea" to="." method="_on_sword_area_area_entered"]

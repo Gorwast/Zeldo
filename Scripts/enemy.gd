@@ -51,3 +51,9 @@ func _on_search_radius_body_exited(body: Node2D) -> void:
 	if player:
 		followPlayer = false
 	animation_player.play("idle")
+
+
+func _on_attack_radius_area_entered(area: Area2D) -> void:
+	
+	if area.has_method("damage"):
+		area.damage(1)

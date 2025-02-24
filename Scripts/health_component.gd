@@ -14,4 +14,5 @@ func damage(attack):
 	health -= attack
 	
 	if health <= 0:
+		Global.score += 1
 		get_parent().queue_free()
