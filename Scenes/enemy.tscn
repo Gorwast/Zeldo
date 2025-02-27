@@ -93,6 +93,8 @@ radius = 31.0644
 [sub_resource type="CircleShape2D" id="CircleShape2D_oktbg"]
 radius = 88.0057
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3lspy"]
+
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_luq0e")

@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://tcu0i1nipqdw"]
+
+[sub_resource type="Gradient" id="Gradient_btfmi"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ljb6t"]
+gradient = SubResource("Gradient_btfmi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2akly"]
+lifetime_randomness = 0.15
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(10, 1, 1)
+emission_shape = 1
+emission_sphere_radius = 70.86
+spread = 0.0
+flatness = 1.0
+initial_velocity_max = 507.37
+gravity = Vector3(0, 0, 0)
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_ljb6t")
+
+[sub_resource type="Environment" id="Environment_bk7ee"]
+tonemap_mode = 3
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_5d1kb"]
+
+[sub_resource type="Compositor" id="Compositor_ecr8c"]
+
+[node name="Particles" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(36, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_2akly")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bk7ee")
+camera_attributes = SubResource("CameraAttributesPhysical_5d1kb")
+compositor = SubResource("Compositor_ecr8c")
