@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkvgpkp6aorpn"]
+[gd_scene load_steps=8 format=3 uid="uid://dahwa1c846hpx"]
 
-[ext_resource type="Theme" uid="uid://qy4oy4qlstxa" path="res://Assets/ui.tres" id="1_2xgyr"]
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_6pcbf"]
-[ext_resource type="Texture2D" uid="uid://b6mul3po1dig" path="res://Assets/title_screen.png" id="1_s7qx1"]
-[ext_resource type="AudioStream" uid="uid://d2uv1tb666f2m" path="res://Assets/Retro8.mp3" id="4_4nxcr"]
+[ext_resource type="Theme" uid="uid://qy4oy4qlstxa" path="res://Assets/ui.tres" id="1_pgtdi"]
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="2_htmf2"]
+[ext_resource type="Texture2D" uid="uid://ckurhelkcvcyj" path="res://Assets/title_death_screen.png" id="3_kcgpw"]
+[ext_resource type="AudioStream" uid="uid://d2uv1tb666f2m" path="res://Assets/Retro8.mp3" id="4_j2cx6"]
 
 [sub_resource type="Animation" id="Animation_sfopr"]
 length = 0.001
@@ -93,15 +93,15 @@ _data = {
 "fade": SubResource("Animation_ijvtq")
 }
 
-[node name="MainMenu" type="Control"]
+[node name="DeathScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_2xgyr")
-script = ExtResource("1_6pcbf")
+theme = ExtResource("1_pgtdi")
+script = ExtResource("2_htmf2")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -117,7 +117,7 @@ offset_bottom = 629.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.84, 0.84)
-texture = ExtResource("1_s7qx1")
+texture = ExtResource("3_kcgpw")
 expand_mode = 4
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
@@ -132,7 +132,7 @@ layout_mode = 2
 
 [node name="PlayButton" type="Button" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Jugar"
+text = "Reintentar"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="BoxContainer"]
 layout_mode = 2
@@ -157,7 +157,7 @@ libraries = {
 }
 
 [node name="PlaySound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_4nxcr")
+stream = ExtResource("4_j2cx6")
 volume_db = 24.0
 
 [connection signal="pressed" from="BoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

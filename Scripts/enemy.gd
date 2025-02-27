@@ -14,7 +14,7 @@ var followPlayer: bool = false
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if followPlayer:
 		move_towards_player()
 
@@ -27,44 +27,39 @@ func move_towards_player():
 		if distance > attack_range:
 			velocity = direction * speed
 			move_and_slide()
-			animation_player.play("walk") # Play walking animation
 		else:
 			velocity = Vector2.ZERO
-			if can_attack:
-				attack()
-
-func attack():
-	can_attack = false
-	animation_player.play("attack")
-	if player.has_method("take_damage"):
-		player.take_damage(damage)
-	await get_tree().create_timer(attack_cooldown).timeout
-	can_attack = true
 
 
-func _on_search_radius_body_entered(body: Node2D) -> void:
+func _on_search_radius_body_entered(_body: Node2D) -> void:
 	if player:
 		followPlayer = true
 
 
-func _on_search_radius_body_exited(body: Node2D) -> void:
+func _on_search_radius_body_exited(_body: Node2D) -> void:
 	if player:
 		followPlayer = false
 	animation_player.play("idle")
 
 
 func _on_attack_radius_area_entered(area: Area2D) -> void:
-	if area.has_method("damage"):
-		attack_area = area
-		$AttackTimer.start()
+	if area is HitboxComponent:
+		print("Enemy on Attack Enemy Hitbox")
+		if area.has_method("damage"):
+			attack_area = area
+			$AttackTimer.start()
 	print("area entered")
 
 
-func _on_attack_radius_area_exited(area: Area2D) -> void:
+func _on_attack_radius_area_exited(_area: Area2D) -> void:
 	$AttackTimer.stop()
 	print("area exit")
 
 
 func _on_attack_timer_timeout() -> void:
-	if attack_area.has_method("damage"):
-		attack_area.damage(1)
+	animation_player.play("attack")
+	print("Damage!")
+	
+func attack_area_now() -> void:
+	attack_area.damage(1)
+	

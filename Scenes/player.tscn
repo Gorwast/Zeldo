@@ -27,7 +27,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.y = move_toward(velocity.y, 0, SPEED)
-		
+	Global.health = $HealthComponent.health
+	if Global.health <= 0:
+		queue_free()
 
 	move_and_slide()
 
@@ -38,7 +40,7 @@ func _on_sword_area_area_entered(area: Area2D) -> void:
 			area.damage(1)
 
 func _exit_tree() -> void:
-	print(\"gg\")
+	pass
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bjge3"]
@@ -161,7 +163,7 @@ shape = SubResource("CapsuleShape2D_4rg2a")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_ghxbd")
-MAX_HEALTH = 1.0
+MAX_HEALTH = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)

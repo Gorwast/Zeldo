@@ -1,15 +1,15 @@
 extends Node2D
 
 const section_time := 2.0
-const line_time := 0.3
-const base_speed := 100
+const line_time := 1.0
+const base_speed := 50
 const speed_up_multiplier := 10.0
-const title_color := Color.blueviolet
+const title_color := Color.BLUE_VIOLET
 
+@onready var line := $CreditsContainer/Line
 var scroll_speed := base_speed
-var speed_up := true
+var speed_up := false
 
-onready var line := $CreditsContainer/Line
 var started := false
 var finished := false
 
@@ -22,37 +22,38 @@ var lines := []
 
 var credits = [
 	[
-		"A game by Awesome Game Company"
+		"ZELDO"
 	],[
-		"Programming",
-		"Programmer Name",
-		"Programmer Name 2"
+		"Programadores",
+		"Lopez Chaidez Luis Enrique",
+		"Espinoza Rivera Saul Filiberto"
 	],[
-		"Art",
-		"Artist Name"
+		"Arte",
+		"craftpix.net free-field-enemies-pixel-art-for-tower-defense",
+		"craftpix.net free-base-4-direction-male-character-pixel-art",
+		"ChatGPT"
 	],[
-		"Music",
-		"Musician Name"
+		"Musica",
+		"a"
 	],[
-		"Sound Effects",
-		"SFX Name"
+		"Efectos de Sonido",
+		"Universal UI Soundpack by Nathan Gibson",
+		
 	],[
 		"Testers",
-		"Name 1",
-		"Name 2",
-		"Name 3"
+		"Tester 1",
+		"Tester 2",
+		"Tester 3"
 	],[
-		"Tools used",
-		"Developed with Godot Engine",
+		"Herramientas Usadas",
+		"Desarrollado con Godot Engine",
 		"https://godotengine.org/license",
 		"",
-		"Art created with My Favourite Art Program",
-		"https://myfavouriteartprogram.com"
 	],[
-		"Special thanks",
-		"My parents",
-		"My friends",
-		"My pet rabbit"
+		"Saludos especiales",
+		"Mis papás",
+		"Mi perro",
+		"Mis compañeros de clase"
 	]
 ]
 
@@ -82,8 +83,8 @@ func _process(delta):
 	
 	if lines.size() > 0:
 		for l in lines:
-			l.rect_position.y -= scroll_speed
-			if l.rect_position.y < -l.get_line_height():
+			l.position.y -= scroll_speed
+			if l.position.y < -960:
 				lines.erase(l)
 				l.queue_free()
 	elif started:
@@ -93,6 +94,7 @@ func _process(delta):
 func finish():
 	if not finished:
 		finished = true
+		print("gg bro")
 		# NOTE: This is called when the credits finish
 		# - Hook up your code to return to the relevant scene here, eg...
 		#get_tree().change_scene("res://scenes/MainMenu.tscn")
@@ -102,8 +104,6 @@ func add_line():
 	var new_line = line.duplicate()
 	new_line.text = section.pop_front()
 	lines.append(new_line)
-	if curr_line == 0:
-		new_line.add_color_override("font_color", title_color)
 	$CreditsContainer.add_child(new_line)
 	
 	if section.size() > 0:
@@ -116,7 +116,7 @@ func add_line():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		finish()
-	if event.is_action_pressed("ui_down") and !event.is_echo():
+	if event.is_action_pressed("down") and !event.is_echo():
 		speed_up = true
-	if event.is_action_released("ui_down") and !event.is_echo():
+	if event.is_action_released("down") and !event.is_echo():
 		speed_up = false

@@ -1,27 +1,25 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx6r7r1uxkd7d"]
+[gd_scene load_steps=11 format=3 uid="uid://cx6r7r1uxkd7d"]
 
 [ext_resource type="PackedScene" uid="uid://bg4vl105gefml" path="res://Assets/mapamundi.tscn" id="1_0fv5x"]
+[ext_resource type="Script" path="res://Scenes/Levels/level_1.gd" id="1_krm41"]
 [ext_resource type="PackedScene" uid="uid://df7jsca8v3k71" path="res://Scenes/player.tscn" id="2_wssov"]
 [ext_resource type="PackedScene" uid="uid://dw8vqv1c6smfv" path="res://Scenes/ui.tscn" id="3_7klpy"]
 [ext_resource type="PackedScene" uid="uid://f3nx1us1at4a" path="res://Scenes/enemy.tscn" id="3_rf87k"]
 [ext_resource type="AudioStream" uid="uid://ch17vgvh7d3ic" path="res://Assets/8_Bit_Nostalgia.mp3" id="4_4yhcn"]
 [ext_resource type="Shader" path="res://Assets/new_shader.gdshader" id="4_ks8nf"]
-[ext_resource type="Script" path="res://Scenes/Levels/Credits.gd" id="7_2dg82"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1av5l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_glqno"]
 shader = ExtResource("4_ks8nf")
 shader_parameter/resolution = Vector2(320, 180)
-shader_parameter/scan_line_amount = 0.506
-shader_parameter/warp_amount = 0.1
+shader_parameter/scan_line_amount = 0.5
+shader_parameter/warp_amount = 0.2
 shader_parameter/noise_amount = 0.03
-shader_parameter/interference_amount = 0.2
+shader_parameter/interference_amount = 0.155
 shader_parameter/grille_amount = 0.1
-shader_parameter/grille_size = 1.0
+shader_parameter/grille_size = 1.5
 shader_parameter/vignette_amount = 0.6
 shader_parameter/vignette_intensity = 0.4
-shader_parameter/aberation_amount = 0.5
+shader_parameter/aberation_amount = 0.2
 shader_parameter/roll_line_amount = 0.0
 shader_parameter/roll_speed = 1.0
 shader_parameter/scan_line_strength = -8.0
@@ -33,6 +31,7 @@ shader_parameter/pixel_strength = -2.0
 radius = 85.0
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_krm41")
 
 [node name="Map" parent="." instance=ExtResource("1_0fv5x")]
 
@@ -41,8 +40,7 @@ position = Vector2(62, 51)
 collision_mask = 7
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-material = SubResource("ShaderMaterial_1av5l")
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
 scale = Vector2(0.5, 0.5)
@@ -55,6 +53,10 @@ material = SubResource("ShaderMaterial_glqno")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -18.0
+offset_right = -2.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(16.32, 18.28)
@@ -73,11 +75,35 @@ offset_bottom = -119.0
 scale = Vector2(0.33, 0.33)
 
 [node name="Enemy" parent="." instance=ExtResource("3_rf87k")]
-position = Vector2(540, 407)
+position = Vector2(919, 340)
 collision_layer = 4
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("CapsuleShape2D_13pc7")
+
+[node name="Enemy2" parent="." instance=ExtResource("3_rf87k")]
+position = Vector2(1016, 1080)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
+shape = SubResource("CapsuleShape2D_13pc7")
+
+[node name="Enemy3" parent="." instance=ExtResource("3_rf87k")]
+position = Vector2(832, 1217)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3"]
+shape = SubResource("CapsuleShape2D_13pc7")
+
+[node name="Enemy4" parent="." instance=ExtResource("3_rf87k")]
+position = Vector2(472, 813)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy4"]
 shape = SubResource("CapsuleShape2D_13pc7")
 
 [node name="2021-08-17-8BitNostalgia-Www_fesliyanStudios_com" type="AudioStreamPlayer" parent="."]
@@ -85,9 +111,21 @@ stream = ExtResource("4_4yhcn")
 autoplay = true
 
 [node name="Credits_area" type="Area2D" parent="."]
-position = Vector2(1126, 1185)
+position = Vector2(1055, 1277)
 scale = Vector2(0.333259, 0.333259)
-script = ExtResource("7_2dg82")
 
 [node name="Credits_CollisionShape2D" type="CollisionShape2D" parent="Credits_area"]
+position = Vector2(3.00067, -57.0127)
 shape = SubResource("CircleShape2D_ji4pd")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 1046.0
+offset_top = 1281.0
+offset_right = 1157.0
+offset_bottom = 1330.0
+text = "Cofre para ver 
+los creditos :o"
+
+[connection signal="tree_exited" from="Player" to="." method="_on_player_tree_exited"]
+[connection signal="tree_exiting" from="Player" to="." method="_on_player_tree_exiting"]
+[connection signal="body_entered" from="Credits_area" to="." method="_on_credits_area_body_entered"]
