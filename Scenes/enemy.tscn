@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://f3nx1us1at4a"]
+[gd_scene load_steps=12 format=3 uid="uid://f3nx1us1at4a"]
 
 [ext_resource type="SpriteFrames" uid="uid://bqrmwtdaiigiu" path="res://Assets/enemy_animation.tres" id="1_ia10f"]
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_luq0e"]
@@ -50,11 +50,14 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54dab"]
+radius = 35.0571
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1fp8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oktbg"]
 radius = 88.0057
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3lspy"]
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
@@ -72,10 +75,8 @@ autoplay = "idle"
 
 [node name="AttackRadius" type="Area2D" parent="AnimatedSprite2D"]
 collision_layer = 2
-collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/AttackRadius"]
-position = Vector2(-20, 0)
 shape = SubResource("CircleShape2D_54dab")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -97,6 +98,9 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SearchRadius"]
 shape = SubResource("CircleShape2D_oktbg")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_3lspy")
 
 [connection signal="area_entered" from="AnimatedSprite2D/AttackRadius" to="." method="_on_attack_radius_area_entered"]
 [connection signal="body_entered" from="SearchRadius" to="." method="_on_search_radius_body_entered"]

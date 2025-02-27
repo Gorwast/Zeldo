@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Zeldo"
-run/main_scene="res://Scenes/main_menu.tscn"
+run/main_scene="res://Scenes/Levels/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ Global="*res://Scripts/global.gd"
 
 [display]
 
+window/size/viewport_height=324
 window/stretch/mode="viewport"
 
 [layer_names]

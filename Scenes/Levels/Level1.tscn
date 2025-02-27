@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx6r7r1uxkd7d"]
+[gd_scene load_steps=12 format=3 uid="uid://cx6r7r1uxkd7d"]
 
 [ext_resource type="PackedScene" uid="uid://bg4vl105gefml" path="res://Assets/mapamundi.tscn" id="1_0fv5x"]
 [ext_resource type="PackedScene" uid="uid://df7jsca8v3k71" path="res://Scenes/player.tscn" id="2_wssov"]
 [ext_resource type="PackedScene" uid="uid://dw8vqv1c6smfv" path="res://Scenes/ui.tscn" id="3_7klpy"]
 [ext_resource type="PackedScene" uid="uid://f3nx1us1at4a" path="res://Scenes/enemy.tscn" id="3_rf87k"]
-[ext_resource type="AudioStream" uid="uid://ch17vgvh7d3ic" path="res://Assets/2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3" id="4_4yhcn"]
+[ext_resource type="AudioStream" uid="uid://ch17vgvh7d3ic" path="res://Assets/8_Bit_Nostalgia.mp3" id="4_4yhcn"]
 [ext_resource type="Shader" path="res://Assets/new_shader.gdshader" id="4_ks8nf"]
+[ext_resource type="Script" path="res://Scenes/Levels/Credits.gd" id="7_2dg82"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1av5l"]
 
@@ -48,10 +49,14 @@ scale = Vector2(0.5, 0.5)
 transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
 
 [node name="ColorRect" type="ColorRect" parent="Player/Camera2D/CanvasLayer"]
+visible = false
 z_index = 20
 material = SubResource("ShaderMaterial_glqno")
-offset_right = -582.128
-offset_bottom = -314.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(16.32, 18.28)
 color = Color(0.812898, 0.316765, 0.452122, 1)
 
@@ -79,8 +84,10 @@ shape = SubResource("CapsuleShape2D_13pc7")
 stream = ExtResource("4_4yhcn")
 autoplay = true
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(937, 1153)
+[node name="Credits_area" type="Area2D" parent="."]
+position = Vector2(1126, 1185)
+scale = Vector2(0.333259, 0.333259)
+script = ExtResource("7_2dg82")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="Credits_CollisionShape2D" type="CollisionShape2D" parent="Credits_area"]
 shape = SubResource("CircleShape2D_ji4pd")

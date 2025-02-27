@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dwnbdemceaxb2" path="res://Assets/FieldsTileset.png" id="1_mrnmp"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_psu81"]
-[ext_resource type="AudioStream" uid="uid://ch17vgvh7d3ic" path="res://Assets/2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3" id="2_t1hin"]
+[ext_resource type="AudioStream" uid="uid://ch17vgvh7d3ic" path="res://Assets/8_Bit_Nostalgia.mp3" id="2_t1hin"]
 [ext_resource type="Texture2D" uid="uid://c2w6grijmtpw6" path="res://Assets/enemy_goblin/S_Attack.png" id="3_i7t4t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h6qg6"]
