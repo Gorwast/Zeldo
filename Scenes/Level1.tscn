@@ -50,8 +50,11 @@ transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
 [node name="ColorRect" type="ColorRect" parent="Player/Camera2D/CanvasLayer"]
 z_index = 20
 material = SubResource("ShaderMaterial_glqno")
-offset_right = -582.128
-offset_bottom = -314.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(16.32, 18.28)
 color = Color(0.812898, 0.316765, 0.452122, 1)
 

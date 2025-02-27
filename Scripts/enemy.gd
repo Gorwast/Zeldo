@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var damage: int = 10
 @export var attack_cooldown: float = 1.5
 
+var attack_area: Area2D
 var player: CharacterBody2D = null
 var can_attack: bool = true
 var followPlayer: bool = false
@@ -14,7 +15,6 @@ func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 
 func _physics_process(delta):
-	
 	if followPlayer:
 		move_towards_player()
 
@@ -54,6 +54,17 @@ func _on_search_radius_body_exited(body: Node2D) -> void:
 
 
 func _on_attack_radius_area_entered(area: Area2D) -> void:
-	
 	if area.has_method("damage"):
-		area.damage(1)
+		attack_area = area
+		$AttackTimer.start()
+	print("area entered")
+
+
+func _on_attack_radius_area_exited(area: Area2D) -> void:
+	$AttackTimer.stop()
+	print("area exit")
+
+
+func _on_attack_timer_timeout() -> void:
+	if attack_area.has_method("damage"):
+		attack_area.damage(1)
