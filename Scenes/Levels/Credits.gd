@@ -53,7 +53,8 @@ var credits = [
 		"Saludos especiales",
 		"Mis papás",
 		"Mi perro",
-		"Mis compañeros de clase"
+		"Mis compañeros de clase",
+		"El minecraft"
 	]
 ]
 

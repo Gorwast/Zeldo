@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=3 uid="uid://cx6r7r1uxkd7d"]
 
-[ext_resource type="PackedScene" uid="uid://bg4vl105gefml" path="res://Assets/mapamundi.tscn" id="1_0fv5x"]
+[ext_resource type="PackedScene" uid="uid://bg4vl105gefml" path="res://Scenes/Levels/mapamundi.tscn" id="1_0fv5x"]
 [ext_resource type="Script" path="res://Scenes/Levels/level_1.gd" id="1_krm41"]
 [ext_resource type="PackedScene" uid="uid://df7jsca8v3k71" path="res://Scenes/player.tscn" id="2_wssov"]
 [ext_resource type="PackedScene" uid="uid://dw8vqv1c6smfv" path="res://Scenes/ui.tscn" id="3_7klpy"]
 [ext_resource type="PackedScene" uid="uid://f3nx1us1at4a" path="res://Scenes/enemy.tscn" id="3_rf87k"]
 [ext_resource type="AudioStream" uid="uid://ch17vgvh7d3ic" path="res://Assets/8_Bit_Nostalgia.mp3" id="4_4yhcn"]
-[ext_resource type="Shader" path="res://Assets/new_shader.gdshader" id="4_ks8nf"]
+[ext_resource type="Shader" path="res://Assets/crt.gdshader" id="4_nlq8k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_glqno"]
-shader = ExtResource("4_ks8nf")
+shader = ExtResource("4_nlq8k")
 shader_parameter/resolution = Vector2(320, 180)
 shader_parameter/scan_line_amount = 0.5
 shader_parameter/warp_amount = 0.2
@@ -60,7 +60,7 @@ offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(16.32, 18.28)
-color = Color(0.812898, 0.316765, 0.452122, 1)
+color = Color(1, 1, 1, 0.415686)
 
 [node name="Ui" parent="Player/Camera2D" instance=ExtResource("3_7klpy")]
 anchors_preset = 8
@@ -104,6 +104,22 @@ collision_layer = 4
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy4"]
+shape = SubResource("CapsuleShape2D_13pc7")
+
+[node name="Enemy5" parent="." instance=ExtResource("3_rf87k")]
+position = Vector2(334.927, 1464.85)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy5"]
+shape = SubResource("CapsuleShape2D_13pc7")
+
+[node name="Enemy6" parent="." instance=ExtResource("3_rf87k")]
+position = Vector2(157.444, 1553.95)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy6"]
 shape = SubResource("CapsuleShape2D_13pc7")
 
 [node name="2021-08-17-8BitNostalgia-Www_fesliyanStudios_com" type="AudioStreamPlayer" parent="."]
